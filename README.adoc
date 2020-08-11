@@ -1,0 +1,118 @@
+= Navis Code Test 
+
+ Scope
+
+ There are bunch of mines in a mine field, and you are tasked with
+ exploding as many of them as you can.  The only caveat is you can
+ only explode one manually.  The mine you manually explode will set
+ off a chain reaction.  For any mine that explodes, all mines within
+ the blast radius of that mine will be triggered to explode in one
+ second.  The mine you manually explode blows up at time 0.
+ Your Task: Write a program which will read in a mines file and
+ output the maximum number of mines you can explode.  Also output
+ which mine you need to manually set off to explode this maximum
+ number.  Since there may be multiple mines that blow up a maximal
+ number of mines you should output all the mines that do that.
+
+
+----
+----
+Reference Documentation
+----
+
+For further reference, please consider the following URL:
+* [REST DOCUMENTATION(SWAGGER)](http://localhost:8080/swagger-ui.html)
+----
+
+----
+----
+Mines File Path
+
+For the project to run correctly, the file path will be the following:
+  * C:\\test-navis\\
+  * The files must be of extension txt
+File mine example:
+
+----
+1 2 53
+-32 40 100
+10 15 25
+-30 -15 2
+----
+
+ Build
+
+----
+ $ ./mvnw clean install
+----
+
+Run
+
+----
+ $ java -jar .\testCodeNavis-0.0.1-SNAPSHOT.jar 
+----
+
+
+ Sample request API mine
+----
+
+* GET /mines/getNumberMinesExploded/x/-30/y/29 HTTP/1.1
+Host: localhost:8080
+* Response
+{
+    "status": 4,
+    "result": 2
+}
+
+* GET /mines/getMaxMinesExploded HTTP/1.1
+Host: localhost:8080
+* Response
+  {
+    "status": 4,
+    "result": {
+        "x": -32,
+        "y": 40,
+        "r": 100
+    }
+} 
+
+*GET /mines/getDetailMinesExploded HTTP/1.1
+Host: localhost:8080
+* Response
+{
+    "status": 4,
+    "result": [
+        {
+            "mine": {
+                "x": 1,
+                "y": 2,
+                "r": 53
+            },
+            "totalExploded": 1
+        },
+        {
+            "mine": {
+                "x": -32,
+                "y": 40,
+                "r": 100
+            },
+            "totalExploded": 2
+        },
+        {
+            "mine": {
+                "x": 10,
+                "y": 15,
+                "r": 25
+            },
+            "totalExploded": 1
+        },
+        {
+            "mine": {
+                "x": -30,
+                "y": -15,
+                "r": 2
+            },
+            "totalExploded": 1
+        }
+    ]
+}
